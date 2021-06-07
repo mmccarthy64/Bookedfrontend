@@ -34,13 +34,19 @@ class Comment {
         console.log(bookId)
         let card = document.getElementById(bookId)
         let commentButton = card.children[4]
-        
-        console.log(commentButton)
+        let elements = [card.children[2], card.children[3]]
+        console.log(elements)
         viewComments = !viewComments
         if(viewComments){
             commentButton.textContent = 'Hide Comments'
+            for (let i = 0; i < elements.length; i++){
+                elements[i].style.display = 'none'
+            }
         } else {
             commentButton.textContent = 'View Comments'
+            for (let i = 0; i < elements.length; i++){
+                elements[i].style.display = 'block'
+            }
         }
     }
 }
