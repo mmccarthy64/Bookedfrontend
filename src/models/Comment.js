@@ -1,3 +1,4 @@
+let viewComments = false
 class Comment {
     constructor(content, book_id, user_id){
         this.content = content;
@@ -5,13 +6,13 @@ class Comment {
         this.user = user_id
     }
 
-    static fetchComments = (book) => {
-        console.log(book)
+    static fetchComments = (bookId) => {
+        console.log(bookId)
         // let comments
-        fetch(`http://localhost:3000/books/${book}/comments`)
+        fetch(`http://localhost:3000/books/${bookId}/comments`)
             .then(response => response.json())
             .then(comments => comments.forEach(comment => {
-                if (comment.book_id === book){
+                if (comment.book_id === bookId){
                     comment = new Comment(comment.content, comment.book_id, comment.user_id)
                     Comment.renderComments(comment)
                 }
@@ -21,15 +22,25 @@ class Comment {
     }
 
     static renderComments(comment) {
-        console.log(comment)
-        let bookCard = document.getElementById(book)
-        // let commentArea = document.createElement('div')
-        // bookCard.append(commentArea)
-        // let ul = document.createElement('ul')
-        // commentArea.append(ul)
-        // console.log(comments.length)
-        // for(let i =0; i < comments.length; i++){
-        //     console.log(comments)
-        // }
+        console.log(comment.content)
+        let comSpace = document.getElementById('#comments-space')
+        // console.log(ul)
+        let line = document.createElement('li')
+        line.textContent = comment.content
+        comSpace.append(line)
+    }
+
+    static handleButton = bookId => {
+        console.log(bookId)
+        let card = document.getElementById(bookId)
+        let commentButton = card.children[4]
+        
+        console.log(commentButton)
+        viewComments = !viewComments
+        if(viewComments){
+            commentButton.textContent = 'Hide Comments'
+        } else {
+            commentButton.textContent = 'View Comments'
+        }
     }
 }

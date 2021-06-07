@@ -1,4 +1,4 @@
-let viewComments = false
+// let viewComments = false
 document.addEventListener("DOMContentLoaded", () => {
     Book.getBooks();
 })
