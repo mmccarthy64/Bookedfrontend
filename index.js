@@ -1,24 +1,23 @@
 let viewComments = false
-
 document.addEventListener("DOMContentLoaded", () => {
-    getBooks();
+    Book.getBooks();
 })
 
-function getBooks(){
-    return fetch('http://localhost:3000/books')
-        .then(resp => resp.json())
-        .then(books => books.forEach(book => {
-            book = new Book(book.title, book.author, book.img, book.page_count)
-            console.log(book)
-        }))
-}
+// function getBooks(){
+//     return fetch('http://localhost:3000/books')
+//         .then(resp => resp.json())
+//         .then(books => books.forEach(book => {
+//             book = new Book(book.title, book.author, book.img, book.page_count)
+//             console.log(book)
+//         }))
+// }
 
 // const newBook = document.getElementById('new-book-btn').addEventListener('click', postBook)
 // const newBookForm = document.querySelector('#new-book-form')
 
 async function postBook(new_book, image){
-    console.log(new_book.volumeInfo.authors)
-    console.log(new_book.volumeInfo.imageLinks.thumbnail.toString())
+    // console.log(new_book.volumeInfo.authors)
+    // console.log(new_book.volumeInfo.imageLinks.thumbnail.toString())
     return fetch('http://localhost:3000/books', {
         method: 'POST',
         headers: {
@@ -34,9 +33,7 @@ async function postBook(new_book, image){
         })
     .then(res => res.json())
     .then((book) => {
-        book = new Book(book.title, book.author, book.img, book.page_count)
-        // console.log(book)
-        renderBooks(book)
+        Book.renderBooks(book)
     })
 }
 
@@ -108,7 +105,7 @@ function renderGoogleResults(results){
         btn.innerText = "Add to Bookshelf"
         btn.addEventListener('click', e => {
             e.preventDefault()
-            console.log(books[i])
+            // console.log(books[i])
             postBook(books[i], bookImg)
         })
 
@@ -126,7 +123,7 @@ searchForm.addEventListener('submit', e => {
 })
 
 async function deleteBookFromBookshelf(id){
-    return fetch(`http://localhost:3000/books/${id}`, {
+    fetch(`http://localhost:3000/books/${id}`, {
         method: `DELETE`,
         headers: {
             'Content-Type': 'application/json'
