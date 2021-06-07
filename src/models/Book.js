@@ -40,19 +40,14 @@ class Book {
         })
     
         let commentBlock = document.createElement('div')
-        commentBlock.setAttribute('style', '')
-        // commentBlock.setAttribute('id', 'comment-block')
 
         let cbtn = document.createElement('button')
         cbtn.innerText = "View Comments"
         cbtn.setAttribute('id', book.id)
         cbtn.addEventListener('click', (e) => {
             e.preventDefault()
-            Comment.handleButton(e.target.id)
-            // let ul = document.createElement('ul')
-            // commentSpace.append(ul)
-            // divCard.append(commentSpace)
-            // Comment.fetchComments(book.id)
+            Comment.handleButton(parseInt(e.target.id))
+            Comment.fetchComments(parseInt(e.target.id))
         })
     
         let divCard = document.createElement('div')
