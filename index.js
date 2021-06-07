@@ -37,15 +37,6 @@ async function postBook(new_book, image){
     })
 }
 
-class Book {
-    constructor(title, author, img, page_count){
-        this.title = title;
-        this.author = author;
-        this.img = img;
-        this.page_count = page_count;
-    }
-}
-
 function renderBooks(book) {
     const booksContainer = document.getElementById('books-container')
     let h2 = document.createElement('h2')
