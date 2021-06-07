@@ -4,11 +4,14 @@ document.addEventListener("DOMContentLoaded", () => {
     getBooks();
 })
 
-// function getBooks(){
-//     return fetch('http://localhost:3000/books')
-//         .then(resp => resp.json())
-//         .then(books => books.forEach(book => renderBooks(book)))
-// }
+function getBooks(){
+    return fetch('http://localhost:3000/books')
+        .then(resp => resp.json())
+        .then(books => books.forEach(book => {
+            book = new Book(book.title, book.author, book.img, book.page_count)
+            console.log(book)
+        }))
+}
 
 // const newBook = document.getElementById('new-book-btn').addEventListener('click', postBook)
 // const newBookForm = document.querySelector('#new-book-form')
