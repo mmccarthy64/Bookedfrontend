@@ -39,20 +39,20 @@ class Book {
             deleteBookFromBookshelf(book.id)
         })
     
-        // let cbtn = document.createElement('button')
-        // cbtn.innerText = "View Comments"
-        // cbtn.addEventListener('click', (e) => {
-        //     e.preventDefault()
-        //     console.log(book)
-        //     fetchComments(book.id)
-        //     // console.log(comments)
-        // })
+        let cbtn = document.createElement('button')
+        cbtn.innerText = "View Comments"
+        cbtn.addEventListener('click', (e) => {
+            e.preventDefault()
+            console.log(book)
+            Comment.fetchComments(book.id)
+            // console.log(comments)
+        })
     
         let divCard = document.createElement('div')
         divCard.setAttribute('class', 'card')
         divCard.setAttribute('id', book.id)
     
-        divCard.append(h2, p, img, btn)
+        divCard.append(h2, p, img, btn, cbtn)
         booksContainer.append(divCard)
     }
 

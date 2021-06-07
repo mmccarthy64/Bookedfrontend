@@ -146,14 +146,6 @@ async function deleteBookFromBookshelf(id){
 //         renderComments(book, comments)
 // }
 
-// class Comment {
-//     constructor(content, book_id, user_id){
-//         this.content = content;
-//         this.book = book_id
-//         this.user = user_id
-//     }
-// }
-
 // function renderComments(book, comments) {
 //     console.log(comments)
 //     console.log(book)
