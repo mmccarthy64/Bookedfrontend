@@ -9,7 +9,7 @@ class Book {
 
     static postBook(new_book, image){
 
-        return fetch('http://localhost:3000/books', {
+        fetch('http://localhost:3000/books', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',

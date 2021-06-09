@@ -4,7 +4,7 @@ class Bookshelf {
     }
 
     async getBooks(){
-        return fetch('http://localhost:3000/books')
+        fetch('http://localhost:3000/books')
             .then(resp => resp.json())
             .then(books => books.forEach(book => {
                 const b = new Book(book)

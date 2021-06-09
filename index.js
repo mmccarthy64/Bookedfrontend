@@ -4,30 +4,8 @@ document.addEventListener("DOMContentLoaded", () => {
     bookshelf.getBooks();
 })
 
-// async function postBook(new_book, image){
-
-//     return fetch('http://localhost:3000/books', {
-//         method: 'POST',
-//         headers: {
-//             'Content-Type': 'application/json',
-//             'Accept': "application/json"
-//         },
-//         body: JSON.stringify({
-//             title: new_book.volumeInfo.title,
-//             author: new_book.volumeInfo.authors.join(),
-//             page_count: new_book.volumeInfo.pageCount,
-//             img: image
-//         })
-//         })
-//     .then(res => res.json())
-//     .then(book => {
-//         const b = new Book(book.id, book.title, book.author, book.img, book.page_count)
-//         b.renderBooks()
-//     })
-// }
-
 async function googleBooksSearch(search) {
-    return fetch(`https://www.googleapis.com/books/v1/volumes?q=${search}&key=AIzaSyBVOEuQ0f8FopsXl0HthBSJ1GIBIbI0C2Y`)
+    fetch(`https://www.googleapis.com/books/v1/volumes?q=${search}&key=AIzaSyBVOEuQ0f8FopsXl0HthBSJ1GIBIbI0C2Y`)
         .then(response => response.json())
         .then(results => renderGoogleResults(results))
         // .catch(err => {console.error(err)}) // add time interval delay to show errors
