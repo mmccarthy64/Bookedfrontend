@@ -8,8 +8,9 @@ class Bookshelf {
             .then(resp => resp.json())
             .then(books => books.forEach(book => {
                 // console.log(book)
-                book = new Book(book.id, book.title, book.author, book.img, book.page_count)
-                Book.renderBooks(book)
+                const b = new Book(book.id, book.title, book.author, book.img, book.page_count)
+                // Book.renderBooks(book)
+                b.renderBooks()
         }))
     }
 }

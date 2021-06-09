@@ -6,28 +6,18 @@ class Book {
         this.img = img;
         this.page_count = page_count;
     }
-    
-    // static getBooks = () => {
-    //     return fetch('http://localhost:3000/books')
-    //         .then(resp => resp.json())
-    //         .then(books => books.forEach(book => {
-    //             // console.log(book)
-    //             book = new Book(book.id, book.title, book.author, book.img, book.page_count)
-    //             Book.renderBooks(book)
-    //     }))
-    // }
 
-    static renderBooks = (book) => {
+    renderBooks(){
         const booksContainer = document.getElementById('books-container')
         let h2 = document.createElement('h2')
-        h2.innerText = book.title
+        h2.innerText = this.title
     
         let p = document.createElement('p')
-        p.innerText = book.author
+        p.innerText = this.author
     
         let img = document.createElement('img')
-        if(book.img != ""){
-            img.setAttribute('src', book['img'])
+        if(this.img != ""){
+            img.setAttribute('src', this.img)
             img.setAttribute('class', 'book-image')
         }
     
@@ -36,14 +26,14 @@ class Book {
         btn.addEventListener('click', (e) => {
             e.preventDefault()
             divCard.remove()
-            deleteBookFromBookshelf(book.id)
+            deleteBookFromBookshelf(this.id)
         })
     
         let commentBlock = document.createElement('div')
 
         let cbtn = document.createElement('button')
         cbtn.innerText = "View Comments"
-        cbtn.setAttribute('id', book.id)
+        cbtn.setAttribute('id', this.id)
         cbtn.addEventListener('click', (e) => {
             e.preventDefault()
             Comment.handleButton(parseInt(e.target.id))
@@ -52,7 +42,7 @@ class Book {
     
         let divCard = document.createElement('div')
         divCard.setAttribute('class', 'card')
-        divCard.setAttribute('id', book.id)
+        divCard.setAttribute('id', this.id)
     
         divCard.append(h2, p, img, btn, cbtn, commentBlock)
         booksContainer.append(divCard)

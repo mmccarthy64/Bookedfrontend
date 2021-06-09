@@ -20,8 +20,9 @@ async function postBook(new_book, image){
         })
         })
     .then(res => res.json())
-    .then((book) => {
-        Book.renderBooks(book)
+    .then(book => {
+        const b = new Book(book.id, book.title, book.author, book.img, book.page_count)
+        b.renderBooks()
     })
 }
 
