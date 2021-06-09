@@ -4,27 +4,27 @@ document.addEventListener("DOMContentLoaded", () => {
     bookshelf.getBooks();
 })
 
-async function postBook(new_book, image){
+// async function postBook(new_book, image){
 
-    return fetch('http://localhost:3000/books', {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json',
-            'Accept': "application/json"
-        },
-        body: JSON.stringify({
-            title: new_book.volumeInfo.title,
-            author: new_book.volumeInfo.authors.join(),
-            page_count: new_book.volumeInfo.pageCount,
-            img: image
-        })
-        })
-    .then(res => res.json())
-    .then(book => {
-        const b = new Book(book.id, book.title, book.author, book.img, book.page_count)
-        b.renderBooks()
-    })
-}
+//     return fetch('http://localhost:3000/books', {
+//         method: 'POST',
+//         headers: {
+//             'Content-Type': 'application/json',
+//             'Accept': "application/json"
+//         },
+//         body: JSON.stringify({
+//             title: new_book.volumeInfo.title,
+//             author: new_book.volumeInfo.authors.join(),
+//             page_count: new_book.volumeInfo.pageCount,
+//             img: image
+//         })
+//         })
+//     .then(res => res.json())
+//     .then(book => {
+//         const b = new Book(book.id, book.title, book.author, book.img, book.page_count)
+//         b.renderBooks()
+//     })
+// }
 
 async function googleBooksSearch(search) {
     return fetch(`https://www.googleapis.com/books/v1/volumes?q=${search}&key=AIzaSyBVOEuQ0f8FopsXl0HthBSJ1GIBIbI0C2Y`)
@@ -38,10 +38,10 @@ function renderGoogleResults(results){
     if (googleResults.hasChildNodes()) {
         googleResults.innerHTML = ''
     }
-    let books = results.items
-    for (let i = 0; i < books.length; i++){
-        let bookTitle = books[i].volumeInfo.title
-        let bookImg = books[i].volumeInfo.imageLinks.thumbnail
+    let googleBooks = results.items
+    for (let i = 0; i < googleBooks.length; i++){
+        let bookTitle = googleBooks[i].volumeInfo.title
+        let bookImg = googleBooks[i].volumeInfo.imageLinks.thumbnail
         let bookPreview = document.createElement('div')
         bookPreview.setAttribute('class', 'card')
 
@@ -55,8 +55,7 @@ function renderGoogleResults(results){
         btn.innerText = "Add to Bookshelf"
         btn.addEventListener('click', e => {
             e.preventDefault()
-            // console.log(books[i])
-            postBook(books[i], bookImg)
+            Book.postBook(googleBooks[i], bookImg)
         })
 
         bookPreview.append(h2, img, btn)
@@ -70,13 +69,3 @@ searchForm.addEventListener('submit', e => {
     let search = document.querySelector('.search-title').value
     googleBooksSearch(search);
 })
-
-async function deleteBookFromBookshelf(id){
-    fetch(`http://localhost:3000/books/${id}`, {
-        method: `DELETE`,
-        headers: {
-            'Content-Type': 'application/json'
-        },
-        body: null
-    })
-}

@@ -1,10 +1,32 @@
 class Book {
-    constructor(id, title, author, img, page_count){
+    constructor({id, title, author, page_count, img}){
         this.id = id;
         this.title = title;
         this.author = author;
-        this.img = img;
         this.page_count = page_count;
+        this.img = img;
+    }
+
+    static postBook(new_book, image){
+
+        return fetch('http://localhost:3000/books', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'Accept': "application/json"
+            },
+            body: JSON.stringify({
+                title: new_book.volumeInfo.title,
+                author: new_book.volumeInfo.authors.join(),
+                page_count: new_book.volumeInfo.pageCount,
+                img: image
+            })
+            })
+        .then(res => res.json())
+        .then(book => {
+            const b = new Book(book)
+            b.renderBooks()
+        })
     }
 
     renderBooks(){
@@ -22,11 +44,11 @@ class Book {
         }
     
         let btn = document.createElement('button')
-        btn.innerText = "Delete from Library"
+        btn.innerText = "Delete from Bookshelf"
         btn.addEventListener('click', (e) => {
             e.preventDefault()
             divCard.remove()
-            deleteBookFromBookshelf(this.id)
+            this.deleteBookFromBookshelf(this.id)
         })
     
         let commentBlock = document.createElement('div')
@@ -48,5 +70,13 @@ class Book {
         booksContainer.append(divCard)
     }
 
-    
+    async deleteBookFromBookshelf(id){
+        fetch(`http://localhost:3000/books/${id}`, {
+            method: `DELETE`,
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: null
+        })
+    }
 }

@@ -7,9 +7,7 @@ class Bookshelf {
         return fetch('http://localhost:3000/books')
             .then(resp => resp.json())
             .then(books => books.forEach(book => {
-                // console.log(book)
-                const b = new Book(book.id, book.title, book.author, book.img, book.page_count)
-                // Book.renderBooks(book)
+                const b = new Book(book)
                 b.renderBooks()
         }))
     }
