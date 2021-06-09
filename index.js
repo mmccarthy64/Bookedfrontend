@@ -1,5 +1,7 @@
+const bookshelf = new Bookshelf('http://localhost:3000')
+
 document.addEventListener("DOMContentLoaded", () => {
-    Book.getBooks();
+    bookshelf.getBooks();
 })
 
 async function postBook(new_book, image){

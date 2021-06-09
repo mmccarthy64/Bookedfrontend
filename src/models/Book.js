@@ -7,15 +7,15 @@ class Book {
         this.page_count = page_count;
     }
     
-    static getBooks = () => {
-        return fetch('http://localhost:3000/books')
-            .then(resp => resp.json())
-            .then(books => books.forEach(book => {
-                // console.log(book)
-                book = new Book(book.id, book.title, book.author, book.img, book.page_count)
-                Book.renderBooks(book)
-        }))
-    }
+    // static getBooks = () => {
+    //     return fetch('http://localhost:3000/books')
+    //         .then(resp => resp.json())
+    //         .then(books => books.forEach(book => {
+    //             // console.log(book)
+    //             book = new Book(book.id, book.title, book.author, book.img, book.page_count)
+    //             Book.renderBooks(book)
+    //     }))
+    // }
 
     static renderBooks = (book) => {
         const booksContainer = document.getElementById('books-container')

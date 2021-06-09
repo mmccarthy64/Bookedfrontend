@@ -6,7 +6,7 @@ class Comment {
         this.user = user_id
     }
 
-    static fetchComments = (bookId) => {
+    static fetchComments(bookId){
         fetch(`http://localhost:3000/books/${bookId}/comments`)
             .then(response => response.json())
             .then(comments => comments.forEach(comment => {
@@ -18,7 +18,7 @@ class Comment {
     }
 
     static renderComments(comment) {
-        console.log(comment)
+        // console.log(comment)
         const commentDiv = document.getElementById(comment.book).children[5]
         const li = document.createElement('li')
         li.textContent = comment.content
